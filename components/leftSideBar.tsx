@@ -1,11 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { JSX } from 'react';
 import LeftSideScrollBar from './leftSideScrollBar';
 import Image from 'next/image';
 import { TbStarsFilled, TbLayoutSidebarRightCollapseFilled } from "react-icons/tb";
 
-export default function LeftSideBar() {
+export default function LeftSideBar() : JSX.Element {
   return (
     <aside className='flex-col gap-y-2 lg:flex w-14 border-r border-gray-200'>
       <div className='flex flex-1 flex-col gap-y-2 h-full overflow-hidden'>

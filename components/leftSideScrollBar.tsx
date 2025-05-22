@@ -1,21 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { JSX } from 'react';
+import { LinkItem } from '@/types/nav';
+
 import { AiFillHome } from 'react-icons/ai';
 import { IoChatbubbleEllipsesSharp, IoTicket } from 'react-icons/io5';
 import { BsGraphUp, BsStars } from 'react-icons/bs';
 import { FaListUl } from 'react-icons/fa';
 import { HiMegaphone } from 'react-icons/hi2';
-import { PiGitMerge } from 'react-icons/pi';
+import { TiFlowMerge } from "react-icons/ti";
 import { RiContactsBookFill, RiFolderImageFill } from 'react-icons/ri';
 import { MdChecklist } from 'react-icons/md';
 import { IoIosSettings } from 'react-icons/io';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-export default function LeftSideScrollBar() {
-  const pathname = usePathname();
-  const links = [
+export default function LeftSideScrollBar() : JSX.Element {
+  const pathname : string = usePathname();
+
+  const links : LinkItem[] = [
     { id: 'dashboard', icon: <AiFillHome /> },
     { divider: true },
     { id: 'chats', icon: <IoChatbubbleEllipsesSharp /> },
@@ -28,7 +31,7 @@ export default function LeftSideScrollBar() {
       id: 'rules',
       icon: (
         <div className="relative">
-          <PiGitMerge />
+          <TiFlowMerge />
           <div className="absolute top-[-4px] right-[-6px] text-[12px] text-[#ebb305]">
             <BsStars />
           </div>
