@@ -1,96 +1,69 @@
 'use client';
 
-import React from 'react'
-import { AiFillHome } from "react-icons/ai";
-
-import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
-import { IoTicket } from "react-icons/io5";
-import { BsGraphUp } from "react-icons/bs";
-
-import { FaListUl } from "react-icons/fa";
-import { HiMegaphone } from "react-icons/hi2";
-import { PiGitMerge } from "react-icons/pi";
-import { BsStars } from "react-icons/bs";
-
-import { RiContactsBookFill } from "react-icons/ri";
-import { RiFolderImageFill } from "react-icons/ri";
-
-import { MdChecklist } from "react-icons/md";
-import { IoIosSettings } from "react-icons/io";
+import React from 'react';
+import { AiFillHome } from 'react-icons/ai';
+import { IoChatbubbleEllipsesSharp, IoTicket } from 'react-icons/io5';
+import { BsGraphUp, BsStars } from 'react-icons/bs';
+import { FaListUl } from 'react-icons/fa';
+import { HiMegaphone } from 'react-icons/hi2';
+import { PiGitMerge } from 'react-icons/pi';
+import { RiContactsBookFill, RiFolderImageFill } from 'react-icons/ri';
+import { MdChecklist } from 'react-icons/md';
+import { IoIosSettings } from 'react-icons/io';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export default function LeftSideScrollBar() {
+  const pathname = usePathname();
+  const links = [
+    { id: 'dashboard', icon: <AiFillHome /> },
+    { divider: true },
+    { id: 'chats', icon: <IoChatbubbleEllipsesSharp /> },
+    { id: 'tickets', icon: <IoTicket /> },
+    { id: 'analytics', icon: <BsGraphUp /> },
+    { divider: true },
+    { id: 'list', icon: <FaListUl /> },
+    { id: 'broadcast', icon: <HiMegaphone /> },
+    {
+      id: 'rules',
+      icon: (
+        <div className="relative">
+          <PiGitMerge />
+          <div className="absolute top-[-4px] right-[-6px] text-[12px] text-[#ebb305]">
+            <BsStars />
+          </div>
+        </div>
+      ),
+    },
+    { divider: true },
+    { id: 'contacts', icon: <RiContactsBookFill /> },
+    { id: 'media', icon: <RiFolderImageFill /> },
+    { divider: true },
+    { id: 'logs', icon: <MdChecklist /> },
+    { id: 'settings', icon: <IoIosSettings /> },
+  ];
+
   return (
-    <div className='overflow-auto flex h-[calc(100%-124px)] flex-col gap-y-1.5 no-scrollbar'>
-        <a href='/dashboard' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <AiFillHome />
-            </div>
-        </a>
+    <div className='overflow-auto flex flex-col h-[calc(100%-124px)] gap-y-1.5 no-scrollbar'>
+      {links.map((link, i) => {
+        if (link.divider) {
+          return <hr key={i} className='m-0 h-0 text-gray-200 border-t-1' />;
+        }
 
-        <hr className='m-0 h-0 text-gray-200 border-t-1'/>
+        const isActive = pathname === '/' + link.id;
 
-        <a href='/chats' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <IoChatbubbleEllipsesSharp />
-            </div>
-        </a>
-        <a href='/tickets' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <IoTicket />
-            </div>
-        </a>
-        <a href='/analytics' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <BsGraphUp fontWeight={900}/>
-            </div>
-        </a>
-
-        <hr className='m-0 h-0 text-gray-200 border-t-1'/>
-
-        <a href='/list' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <FaListUl />
-            </div>
-        </a>
-        <a href='/broadcast' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <HiMegaphone />
-            </div>
-        </a>
-        <a href='/rules' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="relative">
-                <PiGitMerge/>
-                <div className="absolute top-[-4px] right-[-6px] text-[12px] text-[#ebb305]">
-                    <BsStars/>
-                </div>
-            </div>
-        </a>
-
-        <hr className='m-0 h-0 text-gray-200 border-t-1'/>
-
-        <a href='/contacts' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <RiContactsBookFill />
-            </div>
-        </a>
-        <a href='/media' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <RiFolderImageFill />
-            </div>
-        </a>
-
-        <hr className='m-0 h-0 text-gray-200 border-t-1'/>
-
-        <a href='/logs' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <MdChecklist />
-            </div>
-        </a>
-        <a href='/settings' className='flex items-center justify-between hover:bg-gray-200/50 rounded-md px-2 py-1.5'>
-            <div className="">
-                <IoIosSettings />
-            </div>
-        </a>
+        return (
+          <Link
+            key={link.id}
+            href={"/" + link.id}
+            className={`flex items-center justify-between rounded-md px-2 py-1.5 hover:bg-gray-200/50 ${
+              isActive ? 'text-green-700 font-bold' : 'text-gray-700'
+            }`}
+          >
+            <div>{link.icon}</div>
+          </Link>
+        );
+      })}
     </div>
-  )
+  );
 }
