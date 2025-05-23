@@ -10,13 +10,28 @@ import { FiInfo } from "react-icons/fi";
 import { LuTextSearch } from "react-icons/lu";
 import { FaCircleUser } from "react-icons/fa6";
 import { BsArchiveFill } from "react-icons/bs";
+import { HiUserGroup } from "react-icons/hi";
+import NewChat from '@/components/newChat';
 
 export default function Chats() : JSX.Element {
   const [filterActive, setFilterActive] : [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
+  const [addChat, setAddChat] : [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
 
-  const toggleFilterButton : () => void  = () => {
-    setFilterActive(data => !data);
+  const [addNewChat, setAddNewChat] : [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
+
+  const [addNewGroupChat, setAddNewGroupChat] : [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
+
+  const toggleMap : Record<string, Dispatch<SetStateAction<boolean>>> = {
+    filterActive: setFilterActive,
+    addChat: setAddChat,
+    addNewChat: setAddNewChat,
+    addNewGroupChat: setAddNewGroupChat,
   }
+
+  const toggleButton = (buttonName : keyof typeof toggleMap) => {
+    toggleMap[buttonName](prev => !prev); 
+  }
+
   return (
     <div className='flex w-full flex-1 flex-col bg-gray-50 no-scrollbar'>
       <div className="flex flex-1 w-full overflow-hidden">
@@ -40,7 +55,7 @@ export default function Chats() : JSX.Element {
                       </button>
               </div>
               <div className="flex">
-                      <button className="relative flex items-center bg-white hover:bg-gray-100 border-gray-200 text-gray-800  shadow-sm border py-1.5 px-3 gap-x-1 text-xs rounded transition max-lg:!px-2 cursor-pointer " onClick={() => toggleFilterButton()}>
+                      <button className="relative flex items-center bg-white hover:bg-gray-100 border-gray-200 text-gray-800  shadow-sm border py-1.5 px-3 gap-x-1 text-xs rounded transition max-lg:!px-2 cursor-pointer " onClick={() => toggleButton('filterActive')}>
                         <IoFilterOutline fontSize={16}/>
                         <span>Filter</span>
                         {filterActive === true ? 
@@ -54,7 +69,7 @@ export default function Chats() : JSX.Element {
                                   Filter Condition
                                 </div>
                               </div>
-                              <div className="" onClick={() => toggleFilterButton()}>
+                              <div className="" onClick={() => toggleButton('filterActive')}>
                                 <IoIosCloseCircleOutline/>
                               </div>
                             </div>
@@ -99,12 +114,47 @@ export default function Chats() : JSX.Element {
           </div>
 
           <div className="absolute bottom-4 right-4 scale-100">
-            <button className='cursor-pointer'>
-              <div className="flex items-center justify-center h-10 w-10 bg-green-700 transition-all hover:scale-105 rounded-full">
-                < TbMessageCirclePlus color='white'/>
-              </div>
-            </button>
+            <div className="relative">
+              <button className='cursor-pointer' onClick={() => toggleButton('addChat')}>
+                <div className="flex items-center justify-center h-10 w-10 bg-green-700 transition-all hover:scale-105 rounded-full">
+                  < TbMessageCirclePlus color='white'/>
+                </div>
+              </button>
+              {addChat === true ? 
+                <div className="absolute right-0 bottom-[110%] z-40 w-30 flex flex-col rounded-md bg-white p-1 border-gray-200 shadow-md transform opacity-100 scale-100 transition-all">
+                  <div className="w-full">
+                    <div>
+                      <button className='w-full bg-white border-white text-gray-800 hover:bg-gray-100 hover:border-gray-100 py-1 px-2 text-xs pr-4 rounded transition' onClick={() => toggleButton('addNewChat')}>
+                        <div className="flex items-center gap-x-2 cursor-pointer">
+                          <FaCircleUser color='gray'/>
+                          <span>New chat</span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="w-full">
+                    <div>
+                      <button className='w-full bg-white border-white text-gray-800 hover:bg-gray-100 hover:border-gray-100 py-1 px-2 text-xs pr-4 rounded transition' onClick={() => toggleButton('addNewGroupChat')}>
+                        <div className="flex items-center gap-x-2 cursor-pointer">
+                          <HiUserGroup color='gray'/>
+                          <span>New Group</span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div> : 
+                <></>
+              }
+            </div>
           </div>
+            
+          {addNewChat || addNewGroupChat ? 
+            <div className="fixed top-0 right-0 w-[100vw] h-[100vh] bg-white opacity-70">
+              {addNewChat === true ? <NewChat open={addNewChat} closeAddChat={() => setAddNewChat(false)} /> : <></> }
+            </div>
+            : 
+            <></>
+          }
         </div>
         <main className='flex flex-col flex-1 items-center justify-between h-full py-4 text-xs text-gray-400'></main>
       </div>
