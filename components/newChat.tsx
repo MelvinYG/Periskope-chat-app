@@ -1,3 +1,5 @@
+'use client';
+
 import React, { Dispatch, JSX, SetStateAction, useState } from 'react'
 import { IoIosClose } from "react-icons/io";
 import { FaPaperPlane } from "react-icons/fa";
@@ -15,7 +17,7 @@ export default function NewChat({ open , closeAddChat } : NewChatProps) : JSX.El
     <div className="fixed top-1/2 left-1/2 w-[400px]  -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 shadow-lg transition-all rounded-lg">
         <div className="flex justify-between items-center border-b border-gray-200 p-4">
             <span className='text-sm font-medium text-gray-600'>New Chat</span>
-            <button className="bg-white hover:border-gray-100 border border-white hover:bg-gray-100 py-1.5 px-3 text-xs rounded transition !p-1 text-gray-400 focus:outline-none" onClick={closeAddChat}>
+            <button className="bg-white hover:border-gray-100 border border-white hover:bg-gray-100 py-1.5 px-3 text-xs rounded transition !p-1 text-gray-400 focus:outline-none cursor-pointer" onClick={closeAddChat}>
                 <IoIosClose />
             </button>
         </div>

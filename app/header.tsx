@@ -19,6 +19,8 @@ import { IoMdNotificationsOff } from "react-icons/io";
 import { CiCircleList } from "react-icons/ci";
 
 import { usePathname } from 'next/navigation';
+import { supabaseBrowser } from '@/lib/supabase/browser';
+import { useRouter } from 'next/navigation';
 
 type RouteMeta = {
   [key: string]: {
@@ -50,8 +52,15 @@ const routeMeta : RouteMeta = {
 };
 
 export default function Header(): JSX.Element {
+  const router = useRouter();
   const pathname = usePathname();
   const { title, icon } = routeMeta[pathname] || { title: 'App', icon: null };
+
+  const handleLogout = async () => {
+    const supabase = supabaseBrowser();
+    await supabase.auth.signOut();
+    router.refresh();
+  }
 
   return (
     <div className="flex h-12 items-center justify-between gap-x-4 border-b border-gray-200 px-4 py-3 bg-white text-gray-500 text-[12px] font-medium ">
@@ -60,6 +69,12 @@ export default function Header(): JSX.Element {
             <h1 className="font-semibold">{title.toLowerCase()}</h1>
         </div>
         <div className="flex items-center lg:gap-x-3">
+            <div className="flex">
+                <button className='flex items-center bg-green-700 hover:bg-green-500 border-gray-200 text-gray-50  shadow-sm border py-1.5 px-3 gap-x-1 text-xs rounded transition max-lg:!px-2 cursor-pointer '
+                onClick={handleLogout}>
+                    <span>Logout</span>
+                </button>
+            </div>
             <div className="flex">
                 <button className='flex items-center bg-white hover:bg-gray-100 border-gray-200 text-gray-800  shadow-sm border py-1.5 px-3 gap-x-1 text-xs rounded transition max-lg:!px-2 cursor-pointer '>
                     <TbRefreshDot fontSize={18}/>
@@ -75,7 +90,7 @@ export default function Header(): JSX.Element {
             <div className="flex">
                 <button className='flex items-center bg-white hover:bg-gray-100 border-gray-200 text-gray-800  shadow-sm border py-1.5 px-3 gap-x-1 text-xs rounded transition max-lg:!px-2 cursor-pointer '>
                     <div className="relative w-2 h-2 rounded-full bg-[#ffdc00]">
-                        <div className="absolute top-0 left-0 w-full h-full rounded-full animate-pulse" style={{boxShadow: 'rgba(255,220,0, 0.314) 0px 0px 4px 4px;'}}>
+                        <div className="absolute top-0 left-0 w-full h-full rounded-full animate-pulse" style={{boxShadow: 'rgba(255,220,0, 0.314) 0px 0px 4px 4px'}}>
                         </div>
                     </div>
                     <span>5 / 6 phones</span>

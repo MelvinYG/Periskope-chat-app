@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import LeftSideBar from "@/components/leftSideBar";
-import Header from "@/components/header";
+import Header from "@/app/header";
 import RightSideBar from "@/components/rightSideBar";
 
 const inter = Inter({

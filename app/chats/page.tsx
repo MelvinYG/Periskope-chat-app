@@ -12,6 +12,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { BsArchiveFill } from "react-icons/bs";
 import { HiUserGroup } from "react-icons/hi";
 import NewChat from '@/components/newChat';
+import NewGroupChat from '@/components/newGroupChat';
 
 export default function Chats() : JSX.Element {
   const [filterActive, setFilterActive] : [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
@@ -149,8 +150,11 @@ export default function Chats() : JSX.Element {
           </div>
             
           {addNewChat || addNewGroupChat ? 
-            <div className="fixed top-0 right-0 w-[100vw] h-[100vh] bg-white opacity-70">
-              {addNewChat === true ? <NewChat open={addNewChat} closeAddChat={() => setAddNewChat(false)} /> : <></> }
+            <div className="fixed top-0 right-0 w-[100vw] h-[100vh] bg-white/70">
+              {addNewChat === true ? 
+                <NewChat open={addNewChat} closeAddChat={() =>    setAddNewChat(false)} /> :
+                <NewGroupChat closeAddChat={() => setAddNewGroupChat(false)} />
+                }
             </div>
             : 
             <></>
