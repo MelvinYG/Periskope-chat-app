@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import LeftSideBar from "@/components/leftSideBar";
 import Header from "@/components/header";
 import RightSideBar from "@/components/rightSideBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
@@ -29,7 +25,7 @@ export default function RootLayout({
     <html lang="en" className="flex h-full w-full">
       <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-1 items-center justify-center overflow-hidden`}
+        className={`${inter.variable} antialiased flex flex-1 items-center justify-center overflow-hidden`}
       >
         <div className='flex w-full h-screen overflow-hidden relative'>
           <LeftSideBar />
