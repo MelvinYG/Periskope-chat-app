@@ -13,6 +13,7 @@ import { BsArchiveFill } from "react-icons/bs";
 import { HiUserGroup } from "react-icons/hi";
 import NewChat from '@/components/newChat';
 import NewGroupChat from '@/components/newGroupChat';
+import OpenChat from '@/components/openChat';
 
 export default function Chats() : JSX.Element {
   const [filterActive, setFilterActive] : [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
@@ -152,7 +153,7 @@ export default function Chats() : JSX.Element {
           {addNewChat || addNewGroupChat ? 
             <div className="fixed top-0 right-0 w-[100vw] h-[100vh] bg-white/70">
               {addNewChat === true ? 
-                <NewChat open={addNewChat} closeAddChat={() =>    setAddNewChat(false)} /> :
+                <NewChat closeAddChat={() =>    setAddNewChat(false)} /> :
                 <NewGroupChat closeAddChat={() => setAddNewGroupChat(false)} />
                 }
             </div>
@@ -160,7 +161,9 @@ export default function Chats() : JSX.Element {
             <></>
           }
         </div>
-        <main className='flex flex-col flex-1 items-center justify-between h-full py-4 text-xs text-gray-400'></main>
+        <main className='flex flex-col flex-1 items-center justify-between h-[calc(100%-48px)] w-full text-xs text-gray-400'>
+          <OpenChat/>
+        </main>
       </div>
     </div>
   )

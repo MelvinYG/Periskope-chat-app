@@ -4,6 +4,8 @@ import "./globals.css";
 import LeftSideBar from "@/components/leftSideBar";
 import Header from "@/app/header";
 import RightSideBar from "@/components/rightSideBar";
+import { supabaseServer } from "@/lib/supabase/server";
+import InitUser from "@/lib/store/initUser";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -16,11 +18,14 @@ export const metadata: Metadata = {
   description: "Created by @MelvinYG",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = supabaseServer();
+  const { data } = await (await supabase).auth.getSession();
+
   return (
     <html lang="en" className="flex h-full w-full">
       <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
@@ -37,6 +42,7 @@ export default function RootLayout({
             </div>
           </main>
         </div>
+        <InitUser user={data.session?.user}/>
       </body>
     </html>
   );

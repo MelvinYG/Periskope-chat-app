@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase/browser';
 
 export default function SignUpForm() {
@@ -10,7 +10,7 @@ export default function SignUpForm() {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');
-	const router = useRouter();
+	// const router = useRouter();
 
 	const handleSignUp = async (e: React.FormEvent) => {
 		e.preventDefault();

@@ -5,11 +5,10 @@ import { IoIosClose } from "react-icons/io";
 import { FaPaperPlane } from "react-icons/fa";
 
 type NewChatProps = {
-  open: boolean;
   closeAddChat: () => void;
 };
 
-export default function NewChat({ open , closeAddChat } : NewChatProps) : JSX.Element {
+export default function NewChat({ closeAddChat } : NewChatProps) : JSX.Element {
     const [inputValue, setInputValue] : [string, Dispatch<SetStateAction<string>>] = useState("");
   const isValid : boolean = inputValue.trim().length > 0;
 
