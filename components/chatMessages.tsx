@@ -1,15 +1,15 @@
 import ListMessages from './listMessages'
-import { supabaseServer } from '@/lib/supabase/server'
+// import { supabaseServer } from '@/lib/supabase/server'
 
 export default async function ChatMessages() {
-    const supabase = supabaseServer();
+    // const supabase = supabaseServer();
 
-    const { data } = await (await supabase).from("messages").select("*,users(*)");
+    // const { data } = await (await supabase).from("messages").select("*,users(*)");
 
-    console.log(data);
+    // console.log(data);
 
     // const messages = Array.isArray(data) ? data : [];
-    const messages = JSON.parse(JSON.stringify(data || [])); 
+    // const messages = JSON.parse(JSON.stringify(data || [])); 
 
-  return <ListMessages  messages={messages || {}}/>
+  return <ListMessages/>
 }

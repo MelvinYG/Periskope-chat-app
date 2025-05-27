@@ -2,21 +2,20 @@
 
 import React from "react";
 
-type Message = {
-  id: string;
-  text: string;
-  created_at: string;
-  send_by: string;
-  users: {
-    id: string;
-    display_name: string;
-    email: string;
-    avatar_url: string;
-  };
-};
+// type Message = {
+//   id: string;
+//   text: string;
+//   created_at: string;
+//   send_by: string;
+//   users: {
+//     id: string;
+//     display_name: string;
+//     email: string;
+//     avatar_url: string;
+//   };
+// };
 
-export default function ListMessages( {messages} : {messages : Message[]} ) {
-    console.log(messages, "in list msg");
+export default function ListMessages() {
 
   return (
     <div className="w-full h-[calc(100%-134px)]">

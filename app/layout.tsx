@@ -4,8 +4,8 @@ import "./globals.css";
 import LeftSideBar from "@/components/leftSideBar";
 import Header from "@/app/header";
 import RightSideBar from "@/components/rightSideBar";
-import { supabaseServer } from "@/lib/supabase/server";
-import InitUser from "@/lib/store/initUser";
+// import { supabaseServer } from "@/lib/supabase/server";
+// import InitUser from "@/lib/store/initUser";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -23,8 +23,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = supabaseServer();
-  const { data } = await (await supabase).auth.getSession();
+  // const supabase = supabaseServer();
+  // const { data } = await (await supabase).auth.getSession();
 
   return (
     <html lang="en" className="flex h-full w-full">
@@ -42,7 +42,7 @@ export default async function RootLayout({
             </div>
           </main>
         </div>
-        <InitUser user={data.session?.user}/>
+        {/* <InitUser user={data.session?.user}/> */}
       </body>
     </html>
   );
